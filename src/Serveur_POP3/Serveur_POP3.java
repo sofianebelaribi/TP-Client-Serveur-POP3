@@ -8,17 +8,19 @@ import java.util.Date;
 
 public class Serveur_POP3 {
 
+    //CONSTANTS
+    final Boolean SERVER_IS_RUNNING = true;
+    final int SERVER_PORT= 1025;
+
+    //INITIALIZE
     private ServerSocket server;
     private Socket client;
-    private InputStream dis;
-    private BufferedInputStream bis;
-    private OutputStream dos;
-    private BufferedOutputStream bos;
+
 
 
     public Serveur_POP3() {
         try {
-            server = new ServerSocket(1025);
+            server = new ServerSocket(SERVER_PORT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,33 +29,14 @@ public class Serveur_POP3 {
 
     public void run() {
         try {
-            client = server.accept();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
 
-            bos = new BufferedOutputStream(client.getOutputStream());
-
-            String header = "test";
-            bos.write(header.getBytes());
-            System.out.println("Message test envoyé");
-            bos.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String listen ="";
-        while(true) {
-            try {
-                bis = new BufferedInputStream(client.getInputStream());
-                int ascii = bis.read();
-//                System.out.println(Character.toString ((char) ascii));
-                listen = listen + Character.toString ((char) ascii);
-                System.out.println(listen);
-            } catch (IOException e) {
+            while(SERVER_IS_RUNNING) {
+                client = server.accept();
+                new Thread(new Connexion(client)).start();
 
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
