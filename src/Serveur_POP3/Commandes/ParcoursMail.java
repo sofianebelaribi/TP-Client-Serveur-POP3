@@ -1,8 +1,7 @@
 package Serveur_POP3.Commandes;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +33,11 @@ public class ParcoursMail {
 
             }
         }
-        System.out.println(this.mesMails);
+        System.out.println("Liste de mes mails " + this.mesMails);
         return this.mesMails;
     }
 
+    //donne le la
     public void read(File file) {
         try{
             BufferedReader br  = new BufferedReader(new FileReader(file));
@@ -81,12 +81,50 @@ public class ParcoursMail {
     }
 
 
+    public int countoctets(){
+        int nbrInt = 0;
+        try{
+            for (File fichier : this.mesMails) {
+                nbrInt += fichier.length();
+            }
+        }
+        catch(Exception e ){
+            System.out.println(e);
+        }
+        return nbrInt;
+    }
+
+    public File retrievemessageid(int id){
+        return listAllFiles(folder).get(id);
+    }
+
+    public String readMailbyid(int id) throws IOException {
+            BufferedReader br = new BufferedReader(new FileReader(retrievemessageid(id)));
+            try {
+                StringBuilder sb = new StringBuilder();
+                String line = br.readLine();
+
+                while (line != null) {
+                    sb.append("\r");
+                    sb.append(line);
+                    sb.append("\n");
+                    line = br.readLine();
+                }
+                return sb.toString();
+            } finally {
+                br.close();
+            }
+    }
 
     // Lancement du serveur
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ParcoursMail a = new ParcoursMail("so");
-        a.listAllFiles(a.folder);
+//        a.listAllFiles(a.folder);
         System.out.println(a.findmailbyuser("so"));
+        System.out.println(a.retrievemessageid(0));
+        System.out.println(a.readMailbyid(1));
     }
+
+
 }

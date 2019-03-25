@@ -56,7 +56,6 @@ public class CommandesAPOP extends Commandes {
     }
 
     private void setNumberOfMessages(){
-        System.out.println("MON USER EST : "+server.getUser());
         ParcoursMail unParcours = new ParcoursMail(server.getUser());
         unParcours.listAllFiles(unParcours.folder);
 

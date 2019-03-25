@@ -18,7 +18,7 @@ public class Connexion implements Runnable {
     private String user;
 
     //CONSTANTS
-    int NUMBER_OF_CHANCES = 3;
+    int NUMBER_OF_CHANCES = 4;
     final String STATE_AUTHORIZATION = "authorization";
     final String STATE_TRANSACTION = "transaction";
     final String STATE_UPDATE = "update";
@@ -28,9 +28,10 @@ public class Connexion implements Runnable {
     //CONSTRUCTOR
     private void setCommandesList(){
         CommandesList.add(new CommandesAPOP(this,"APOP"));
-//        CommandesList.add(new CommandesSTAT(this,"STAT"));
-//        CommandesList.add(new CommandesRETR(this,"RETR"));
-//        CommandesList.add(new CommandesQUIT(this,"QUIT"));
+        CommandesList.add(new CommandesSTAT(this,"STAT"));
+        CommandesList.add(new CommandesRETR(this,"RETR"));
+        CommandesList.add(new CommandesQUIT(this,"QUIT"));
+        CommandesList.add(new CommandesACTU(this,"ACTU"));
     }
     Connexion(Socket aClientSocket){
         setCommandesList();
