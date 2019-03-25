@@ -10,7 +10,7 @@ public class Serveur_POP3 {
 
     //CONSTANTS
     final Boolean SERVER_IS_RUNNING = true;
-    final int SERVER_PORT= 1025;
+    final int SERVER_PORT= 110;
 
     //INITIALIZE
     private ServerSocket server;
