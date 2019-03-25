@@ -44,7 +44,7 @@ public class Client_POP3 {
                 System.out.println(e.getMessage());
             }
             byte[] reponse = new byte[1024];
-            TimeUnit.SECONDS.sleep(10);
+//            TimeUnit.SECONDS.sleep(10);
             in.read(reponse);
             System.out.println(new String(reponse));
             return true;
@@ -54,9 +54,9 @@ public class Client_POP3 {
             System.out.println(e.getMessage());
             return false;
         }
-        catch (InterruptedException e){
-            return false;
-        }
+//        catch (InterruptedException e){
+//            return false;
+//        }
     }
 
     private void run(){

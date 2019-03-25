@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Connexion implements Runnable {
 
     //INITIALIZE
-    private DataInputStream inputdata;
+    private BufferedReader inputdata;
     private DataOutputStream outputdata;
     private Socket client;
     private boolean close;
@@ -38,7 +38,7 @@ public class Connexion implements Runnable {
         setCommandesList();
         try {
             client = aClientSocket;
-            inputdata = new DataInputStream(client.getInputStream());
+            inputdata = new BufferedReader( new InputStreamReader(client.getInputStream()));
             outputdata =new DataOutputStream( client.getOutputStream());
         }
         catch(IOException e) {
@@ -79,11 +79,8 @@ public class Connexion implements Runnable {
     private void readCommand(){
         System.out.println("Reading from stream:");
         try {
-            byte[] reponse = new byte[1024];
-            inputdata.read(reponse);
-            String command = new String(reponse);
-            System.out.println("LOL");
-            while (!close) {
+            String command;
+            while ((command = inputdata.readLine()) != null && !close) {
                 System.out.println ("receive from : " + client.getInetAddress() + " : " + client.getPort() + ", command : " + command);
                 answerCommand(command);
                 if(close)
@@ -155,4 +152,3 @@ public class Connexion implements Runnable {
         return userfile;
     }
 }
-
