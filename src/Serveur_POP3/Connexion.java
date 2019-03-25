@@ -15,7 +15,7 @@ public class Connexion implements Runnable {
     private Socket client;
     private boolean close;
     private ArrayList<Commandes> CommandesList = new ArrayList<>();
-    private String userfile;
+    private String user;
 
     //CONSTANTS
     int NUMBER_OF_CHANCES = 3;
@@ -28,10 +28,8 @@ public class Connexion implements Runnable {
     //CONSTRUCTOR
     private void setCommandesList(){
         CommandesList.add(new CommandesAPOP(this,"APOP"));
-//        CommandesList.add(new CommandesLIST(this,"LIST"));
 //        CommandesList.add(new CommandesSTAT(this,"STAT"));
 //        CommandesList.add(new CommandesRETR(this,"RETR"));
-//        CommandesList.add(new CommandesDELE(this,"DELE"));
 //        CommandesList.add(new CommandesQUIT(this,"QUIT"));
     }
     Connexion(Socket aClientSocket){
@@ -144,11 +142,11 @@ public class Connexion implements Runnable {
         return Objects.equals(state, STATE_TRANSACTION);
     }
 
-    public void setUserFile(String file) {
-        this.userfile = file;
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public String getUserfile() {
-        return userfile;
+    public String getUser() {
+        return user;
     }
 }

@@ -8,10 +8,10 @@ import java.util.List;
 
 public class ParcoursMail {
 
-    private String user;
-    private List<File> mesMails;
-    private File folder = new File("src\\Serveur_POP3\\BDD\\Mails");
-    private File userfile = new File("src\\Serveur_POP3\\BDD\\Mails\\users.txt");
+    public String user;
+    public List<File> mesMails;
+    public File folder = new File("src\\Serveur_POP3\\BDD\\Mails");
+    public File userfile = new File("src\\Serveur_POP3\\BDD\\Users\\users.txt");
 
     public ParcoursMail(String user) {
         this.user = user;

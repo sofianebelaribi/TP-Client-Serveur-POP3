@@ -8,9 +8,10 @@ import java.io.File;
 import java.io.FileReader;
 
 public class CommandesAPOP extends Commandes {
+
     private String login;
     private int nbrMsg;
-    final String userfile = "src\\Serveur_POP3\\BDD\\Mails\\users.txt";
+    private final String userfile = "src\\Serveur_POP3\\BDD\\Users\\users.txt";
 
     public CommandesAPOP(Connexion server, String command) {
         super(server, command);
@@ -24,7 +25,8 @@ public class CommandesAPOP extends Commandes {
             //check if user is in db
             if (checkAuthentification(s)) {
                 server.setState(server.getSTATE_TRANSACTION());
-
+                setUser(s[0]);
+                setNumberOfMessages();
                 return "+OK " + login + "'s maildrop has " + nbrMsg + " messages";
             }
             return "-ERR " + server.getNUMBER_OF_CHANCES() + " chances left";
@@ -53,12 +55,13 @@ public class CommandesAPOP extends Commandes {
         return read(s);
     }
 
-//        private void setNumberOfMessages(){
-// }
+    private void setNumberOfMessages(){
+        System.out.println("MON USER EST : "+server.getUser());
+        ParcoursMail unParcours = new ParcoursMail("guillaume.l@gmail.com");
+        unParcours.listAllFiles(unParcours.folder);
 
-    private void setUserFile(String file) {
-
-        server.setUserFile(file);
+        this.nbrMsg = unParcours.mesMails.size();
+        System.out.println(this.nbrMsg);
     }
 
     public boolean read(String[] s) {
@@ -78,6 +81,10 @@ public class CommandesAPOP extends Commandes {
             System.out.println(e);
         }
         return false;
+    }
+
+    private void setUser(String user) {
+        server.setUser(user);
     }
 }
 
