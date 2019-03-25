@@ -9,12 +9,14 @@ import java.util.List;
 public class ParcoursMail {
 
     public String user;
+    public String mail;
     public List<File> mesMails;
     public File folder = new File("src\\Serveur_POP3\\BDD\\Mails");
     public File userfile = new File("src\\Serveur_POP3\\BDD\\Users\\users.txt");
 
     public ParcoursMail(String user) {
         this.user = user;
+        this.mail = findmailbyuser(user);
         this.mesMails = new ArrayList<>();
     }
 
@@ -43,7 +45,7 @@ public class ParcoursMail {
             while((strLine = br.readLine()) != null ){
                 if (strLine.contains("To:")){
                     String toMail = strLine.split("<")[1].split(">")[0];
-                    if(toMail.equals(this.user)) {
+                    if(toMail.equals(this.mail)) {
 //                        System.out.println("TO : -->"+toMail);
 //                        System.out.println(file.length());
 //                        System.out.println(file.getName());
@@ -83,8 +85,8 @@ public class ParcoursMail {
     // Lancement du serveur
 
     public static void main(String[] args) {
-        ParcoursMail a = new ParcoursMail("guillaume.l@gmail.com");
-//        a.listAllFiles(a.folder);
-        System.out.println(a.findmailbyuser("Sofiane"));
+        ParcoursMail a = new ParcoursMail("so");
+        a.listAllFiles(a.folder);
+        System.out.println(a.findmailbyuser("so"));
     }
 }
