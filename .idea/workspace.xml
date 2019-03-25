@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e485474c-0719-4589-b8bd-7653cbff553a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP-Client-Serveur-POP3/Serveur_POP3/BDD/Mails/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP-Client-Serveur-POP3/Serveur_POP3/BDD/Mails/users.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP-Client-Serveur-POP3/Serveur_POP3/Commandes/CommandesAPOP.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP-Client-Serveur-POP3/Serveur_POP3/Commandes/CommandesAPOP.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TP-Client-Serveur-POP3/Serveur_POP3/Commandes/ParcoursMail.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP-Client-Serveur-POP3/Serveur_POP3/Commandes/ParcoursMail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/users.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Serveur_POP3/Commandes/CommandesAPOP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Serveur_POP3/Commandes/CommandesAPOP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Serveur_POP3/Commandes/ParcoursMail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Serveur_POP3/Commandes/ParcoursMail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP-Client-Serveur-POP3/Client_POP3/Client_POP3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP-Client-Serveur-POP3/Client_POP3/Client_POP3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TP-Client-Serveur-POP3/Serveur_POP3/Connexion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TP-Client-Serveur-POP3/Serveur_POP3/Connexion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client_POP3/Client_POP3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client_POP3/Client_POP3.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,49 +17,22 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1003408960">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="java" value="9" />
-          <entry key="txt" value="17" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="JAVA" value="9" />
-          <entry key="PLAIN_TEXT" value="17" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="java" value="1842" />
-          <entry key="txt" value="43" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="JAVA" value="1842" />
-          <entry key="PLAIN_TEXT" value="43" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Serveur_POP3.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+            <state relative-caret-position="719">
+              <caret line="51" column="1" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Commandes/Commandes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-12">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -70,8 +40,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Commandes/ParcoursMail.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="738">
-              <caret line="87" column="56" selection-start-line="87" selection-start-column="56" selection-end-line="87" selection-end-column="56" />
+            <state relative-caret-position="190">
+              <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,8 +52,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Client_POP3/Client_POP3.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="52" column="28" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="28" />
+            <state relative-caret-position="243">
+              <caret line="77" column="46" selection-start-line="77" selection-start-column="46" selection-end-line="77" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Connexion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="30" column="60" selection-start-line="30" selection-start-column="60" selection-end-line="30" selection-end-column="60" />
+            <state relative-caret-position="-522">
+              <caret line="62" column="62" lean-forward="true" selection-start-line="62" selection-start-column="62" selection-end-line="62" selection-end-column="62" />
               <folding>
                 <element signature="e#1714#1715#0" expanded="true" />
                 <element signature="e#1754#1755#0" expanded="true" />
@@ -115,11 +85,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Commandes/CommandesAPOP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="61" column="5" lean-forward="true" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="120">
+              <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -139,7 +106,6 @@
       <find>while</find>
       <find>uffer</find>
       <find>system.out.print</find>
-      <find>strLine.split(&quot; &quot;)</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -150,21 +116,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/com/company/Main.java" />
-        <option value="$PROJECT_DIR$/src/Serveur_POP3/Connexion.java" />
-        <option value="$PROJECT_DIR$/src/Client_POP3/Client_POP3.java" />
         <option value="$PROJECT_DIR$/src/Serveur_POP3/Commandes/lol.txt" />
         <option value="$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/mail1.txt" />
-        <option value="$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/users.txt" />
-        <option value="$PROJECT_DIR$/src/Serveur_POP3/Commandes/CommandesAPOP.java" />
         <option value="$PROJECT_DIR$/src/Serveur_POP3/Commandes/ParcoursMail.java" />
+        <option value="$PROJECT_DIR$/src/Serveur_POP3/Connexion.java" />
+        <option value="$PROJECT_DIR$/src/Client_POP3/Client_POP3.java" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
@@ -177,7 +135,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -220,13 +178,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553518922673" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553549208346" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -249,7 +207,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ParcoursMail">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Client_POP3.Client_POP3" />
       <module name="TP-Client-Serveur-POP3" />
@@ -297,35 +255,35 @@
       <workItem from="1552380873420" duration="43000" />
       <workItem from="1552892925003" duration="1790000" />
       <workItem from="1552979489899" duration="450000" />
-      <workItem from="1553506879909" duration="9260000" />
-      <workItem from="1553536002792" duration="29000" />
+      <workItem from="1553506879909" duration="3398000" />
+      <workItem from="1553511250286" duration="9339000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11572000" />
+    <option name="totallyTimeSpent" value="15020000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1684435" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16944024" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.329718" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.3289689" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.27006507" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.3991323" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.3289689" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.39934534" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.2516269" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.25040916" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
@@ -344,27 +302,32 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Client_POP3/Client_POP3.java</url>
+          <line>93</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/net/Socket.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/net/Socket.java" />
+    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/mail2.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="940" column="24" selection-start-line="940" selection-start-column="24" selection-end-line="940" selection-end-column="24" />
+        <state>
+          <caret column="39" lean-forward="true" selection-start-column="39" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Commandes/lol.txt" />
-    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Commandes/Commandes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="28" column="53" lean-forward="true" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/users.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/mail1.txt">
+    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/mail5.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/mail6.txt">
@@ -374,33 +337,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/mail5.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/mail4.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/mail3.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/mail2.txt">
+    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Commandes/lol.txt" />
+    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/mail1.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Commandes/ParcoursMail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="39" lean-forward="true" selection-start-column="39" selection-end-column="39" />
+        <state relative-caret-position="190">
+          <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Commandes/Commandes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Serveur_POP3.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+        <state relative-caret-position="719">
+          <caret line="51" column="1" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Client_POP3/Client_POP3.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="52" column="28" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="28" />
+        <state relative-caret-position="243">
+          <caret line="77" column="46" selection-start-line="77" selection-start-column="46" selection-end-line="77" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -409,8 +383,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Connexion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="30" column="60" selection-start-line="30" selection-start-column="60" selection-end-line="30" selection-end-column="60" />
+        <state relative-caret-position="-522">
+          <caret line="62" column="62" lean-forward="true" selection-start-line="62" selection-start-column="62" selection-end-line="62" selection-end-column="62" />
           <folding>
             <element signature="e#1714#1715#0" expanded="true" />
             <element signature="e#1754#1755#0" expanded="true" />
@@ -426,30 +400,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Commandes/ParcoursMail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="87" column="56" selection-start-line="87" selection-start-column="56" selection-end-line="87" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/BDD/Mails/users.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Serveur_POP3/Commandes/CommandesAPOP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="61" column="5" lean-forward="true" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="120">
+          <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
         </state>
       </provider>
     </entry>

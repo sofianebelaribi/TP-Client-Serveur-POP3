@@ -28,11 +28,11 @@ public class Connexion implements Runnable {
     //CONSTRUCTOR
     private void setCommandesList(){
         CommandesList.add(new CommandesAPOP(this,"APOP"));
-//        CommandesList.add(new CommandesLIST(this,"LIST"));
-//        CommandesList.add(new CommandesSTAT(this,"STAT"));
-//        CommandesList.add(new CommandesRETR(this,"RETR"));
-//        CommandesList.add(new CommandesDELE(this,"DELE"));
-//        CommandesList.add(new CommandesQUIT(this,"QUIT"));
+        CommandesList.add(new CommandesLIST(this,"LIST"));
+        CommandesList.add(new CommandesSTAT(this,"STAT"));
+        CommandesList.add(new CommandesRETR(this,"RETR"));
+        CommandesList.add(new CommandesDELE(this,"DELE"));
+        CommandesList.add(new CommandesQUIT(this,"QUIT"));
     }
     Connexion(Socket aClientSocket){
         setCommandesList();
@@ -60,7 +60,7 @@ public class Connexion implements Runnable {
     public void run(){
         try {
             // an echo server
-            String data = "+OK alpha POP3 server Ready\n\r\n\r";
+            String data = "+OK alpha POP3 server Ready\r";
 
             System.out.println ("New connection: " + client.getPort() + ", " + client.getInetAddress());
             outputdata.writeBytes(data); // UTF is a string encoding
@@ -116,7 +116,7 @@ public class Connexion implements Runnable {
     }
 
     public void sendResponse(String data){
-        data += "\n\r\n\r";
+        data += "\r";
         try {
             outputdata.writeBytes(data);
             outputdata.flush();
