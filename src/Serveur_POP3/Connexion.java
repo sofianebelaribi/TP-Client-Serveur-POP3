@@ -59,7 +59,7 @@ public class Connexion implements Runnable {
     public void run(){
         try {
             // an echo server
-            String data = "+OK alpha POP3 server Ready\n\r\n\r";
+            String data = "+OK alpha POP3 server Ready\r";
 
             System.out.println ("New connection: " + client.getPort() + ", " + client.getInetAddress());
             outputdata.writeBytes(data); // UTF is a string encoding
@@ -115,7 +115,7 @@ public class Connexion implements Runnable {
     }
 
     public void sendResponse(String data){
-        data += "\n\r\n\r";
+        data += "\r";
         try {
             outputdata.writeBytes(data);
             outputdata.flush();
