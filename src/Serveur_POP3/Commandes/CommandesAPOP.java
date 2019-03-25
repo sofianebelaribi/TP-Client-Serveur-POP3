@@ -3,9 +3,14 @@ package Serveur_POP3.Commandes;
 
 import Serveur_POP3.Connexion;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 public class CommandesAPOP extends Commandes {
     private String login;
     private int nbrMsg;
+    final String userfile = "src\\Serveur_POP3\\BDD\\Mails\\users.txt";
 
     public CommandesAPOP(Connexion server, String command) {
         super(server, command);
@@ -19,6 +24,7 @@ public class CommandesAPOP extends Commandes {
             //check if user is in db
             if (checkAuthentification(s)) {
                 server.setState(server.getSTATE_TRANSACTION());
+
                 return "+OK " + login + "'s maildrop has " + nbrMsg + " messages";
             }
             return "-ERR " + server.getNUMBER_OF_CHANCES() + " chances left";
@@ -44,15 +50,34 @@ public class CommandesAPOP extends Commandes {
 
     private boolean checkAuthentification(String[] s){
         //test in bd user & pass
-        return true;
+        return read(s);
     }
 
-//        private void setNumberOfMessages(){}
+//        private void setNumberOfMessages(){
+// }
 
     private void setUserFile(String file) {
+
         server.setUserFile(file);
     }
 
+    public boolean read(String[] s) {
+        try{
+            BufferedReader br  = new BufferedReader(new FileReader(userfile));
+            String strLine;
+            while((strLine = br.readLine()) != null ){
+                String user = strLine.split(" ")[0];
+                String pass = strLine.split(" ")[1];
 
+                if (user.equals(s[0]) && pass.equals(s[1])){
+                    return true;
+                }
+            }
+        }
+        catch(Exception e ){
+            System.out.println(e);
+        }
+        return false;
+    }
 }
 

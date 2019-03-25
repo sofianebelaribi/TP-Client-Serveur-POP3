@@ -1,4 +1,3 @@
-<user> <mdp> <mail>;
-<Jonathan> <RENARD> <jonathan.r@gmail.com>;
-<Sofiane> <BELARIBI> <sofiane.b@gmail.com>;
-<Guillaume> <LEFEBVRE> <guillaume.l@gmail.com>;
+Jonathan RENARD <jonathan.r@gmail.com>;
+Sofiane BELARIBI <sofiane.b@gmail.com>;
+Guillaume LEFEBVRE <guillaume.l@gmail.com>;
