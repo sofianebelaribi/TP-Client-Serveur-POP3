@@ -41,7 +41,7 @@ public class Client_POP3 {
                 System.out.println(e.getMessage());
             }
             String response = in.readLine();
-            System.out.println(response);
+            //System.out.println(response);
             return true;
         }
         catch (IOException e){
@@ -54,9 +54,19 @@ public class Client_POP3 {
     private String demandeConnection(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez indiquer votre nom d'utilisateur: ");
-        String commande = "APOP "+sc.nextLine();
+        String user = sc.nextLine();
+        if(user.split(" ").length>1){
+            System.out.println("Vous n'avez pas le droit de mettre d'espace!");
+            return demandeConnection();
+        }
+        String commande = "APOP "+user;
         System.out.println("Veuillez indiquer votre mot de passe: ");
-        commande += " "+sc.nextLine();
+        String pass = sc.nextLine();
+        if(pass.split(" ").length>1){
+            System.out.println("Vous n'avez pas le droit de mettre d'espace!");
+            return demandeConnection();
+        }
+        commande += " "+pass;
         return commande;
     }
 
@@ -67,7 +77,7 @@ public class Client_POP3 {
             String[] response = in.readLine().split(" ");
             if(response[0].startsWith("+")){
                 connectedToAccount = true;
-                return "OK";
+                return response[response.length-2];
             }
             return response[1];
         }
@@ -87,11 +97,11 @@ public class Client_POP3 {
             tries++;
         }
         if(!connectedToServer){
-            System.out.println("Problème de connection au serveur!");
+            System.out.println("Probleme de connection au serveur!");
             return;
         }
 
-        //Connection à un compte
+        //Connection a un compte
         String response;
         Scanner sc = new Scanner(System.in);
         System.out.println("Bienvenue dans notre service!");
@@ -100,17 +110,20 @@ public class Client_POP3 {
         // Si la connection ne s'est pas faite
         while(!connectedToAccount){
             if(response.equals("0")){
-                System.out.println("Vous n'avez plus le droit de vous authentifier.");
+                System.out.println("Vous n'avez plus le droit de vous authentifier. Reessayez une prochaine fois.");
+                //Pour quitter le processus completement
+                System.exit(0);
             }
             else{
-                System.out.println("Oops, vos identifiants ne sont pas corrects, il vous restes "+response+" tentatives. Veuillez les resaisir:");
+                System.out.println("Oops, vos identifiants ne sont pas corrects, il vous restes "+response+" tentative(s). Veuillez les resaisir:");
                 commande = demandeConnection();
                 response = sendConnection(commande);
             }
         }
-        System.out.println("Vous êtes connecté!");
+        System.out.println("Vous etes connecte!\nVous avez "+response+" message(s)\n");
+
         while(connectedToServer){
-            System.out.println("Veuillez écrire une commande ici: ");
+            System.out.println("Veuillez ecrire une commande ici: ");
             commande = sc.nextLine();
             switch (commande.toUpperCase()){
                 case "ACTUALISER":
@@ -126,26 +139,35 @@ public class Client_POP3 {
                     break;
 
                 default:
-                    System.out.println("Commande inconnue! Tapez 'help' pour connaître les commandes possibles");
+                    System.out.println("Commande inconnue! Tapez 'help' pour connaitre les commandes possibles");
             }
         }
     }
 
     private void cmdActualiser(){
         try{
-            // On récupère le nombre de mail
+            // On recupere le nombre de mail
             String commande = "STAT";
             out.writeBytes(commande+"\r");
             out.flush();
-            String[] response = in.readLine().split(" ");
+            String returned = in.readLine();
+            String[] response = returned.split(" ");
+
+            //System.out.println(returned);
+
             if(response[0].startsWith("+")){
                 Integer nbMail = Integer.parseInt(response[1]);
-                commande = "RETR";
-                out.writeBytes(commande+"\r");
-                out.flush();
+                BufferedWriter file = new BufferedWriter(new FileWriter("data/client/text.txt"));
+                System.out.println("Vous avez "+nbMail+" messages");
                 for(int i=0;i<nbMail;i++){
-                    nouveauMail();
+                    commande = "RETR " + i;
+                    out.writeBytes(commande+"\r");
+                    out.flush();
+                    nouveauMail(file);
                 }
+
+                file.close();
+                readFile();
             }
         }
         catch(IOException e){
@@ -154,22 +176,34 @@ public class Client_POP3 {
         }
     }
 
-    private void nouveauMail(){
+    private void nouveauMail(BufferedWriter file){
+
         try{
-            BufferedWriter file = new BufferedWriter(new FileWriter("data/client/"));
-            String commande = "";
-            out.writeBytes(commande);
-            out.flush();
             String response;
             while(!(response = in.readLine()).equals(".")){
                 file.write(response);
                 file.newLine();
             }
-            file.close();
+            file.newLine();
+            file.newLine();
         }
         catch (IOException e){
             System.out.println(e.getLocalizedMessage());
             System.out.println(e.getMessage());
+        }
+    }
+
+    private void readFile() {
+        try{
+            BufferedReader file = new BufferedReader(new FileReader("data/client/text.txt"));
+
+            String strLine;
+            while((strLine = file.readLine()) != null ){
+                System.out.println(strLine);
+            }
+            file.close();
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -179,8 +213,9 @@ public class Client_POP3 {
             out.writeBytes(commande+"\r");
             out.flush();
             String response = in.readLine();
+            //System.out.println(response);
             if(response.startsWith("+")){
-                System.out.println("Vous vous êtes déconnecté, nous vous remerçions pour votre visite.");
+                System.out.println("Vous vous etes deconnecte, nous vous remercions pour votre visite.");
                 connectedToServer = false;
                 connectedToAccount = false;
             }
@@ -209,6 +244,7 @@ public class Client_POP3 {
 
     public static void main(String[] args) {
         Client_POP3 cli = new Client_POP3();
+        //Client_POP3 cli = new Client_POP3();
         cli.run();
     }
 }

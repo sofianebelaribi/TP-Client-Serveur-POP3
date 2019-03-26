@@ -1,11 +1,11 @@
 From: Guillaume LEFEBVRE <guillaume.l@gmail.com>
 To: Sofiane BELARIBI <sofiane.b@gmail.com>
-Subject: Invitation à Disneyland Paris
+Subject: Invitation a Disneyland Paris
 Date: Mon, 25 Mar 2019 10:39:28 -0600
 Message-ID: <4@local.machine.example>
 
 Sofiane,
-T'as raison, il est gentil quand même et il ne mérite pas ça...
+T'as raison, il est gentil quand meme et il ne merite pas ca...
 Je vais lui dire gentiment que je ne suis pas disponible.
 Guillaume
 .

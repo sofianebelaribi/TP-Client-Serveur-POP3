@@ -1,12 +1,12 @@
 From: Sofiane BELARIBI <sofiane.b@gmail.com>
 To: Guillaume LEFEBVRE <guillaume.l@gmail.com>
-Subject: Invitation à Disneyland
+Subject: Invitation a Disneyland
 Date: Mon, 25 Mar 2019 10:32:54 -0600
 Message-ID: <3@local.machine.example>
 
 Salut Guillaume,
-Je comprends, il peut être un peu trop intrusif...
-Essaie de rester gentil avec lui, car il n'a rien fait de méchant.
+Je comprends, il peut etre un peu trop intrusif...
+Essaie de rester gentil avec lui, car il n'a rien fait de mechant.
 Courage Guillaume,
 Sofiane
 .

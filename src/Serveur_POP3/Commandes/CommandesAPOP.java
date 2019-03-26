@@ -60,7 +60,7 @@ public class CommandesAPOP extends Commandes {
         unParcours.listAllFiles(unParcours.folder);
 
         this.nbrMsg = unParcours.mesMails.size();
-        System.out.println(this.nbrMsg);
+        System.out.println(this.nbrMsg + " messages");
     }
 
     public boolean read(String[] s) {
