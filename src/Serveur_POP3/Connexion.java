@@ -18,7 +18,7 @@ public class Connexion implements Runnable {
     private String user;
 
     //CONSTANTS
-    int NUMBER_OF_CHANCES = 4;
+    int NUMBER_OF_CHANCES = 3;
     final String STATE_AUTHORIZATION = "authorization";
     final String STATE_TRANSACTION = "transaction";
     final String STATE_UPDATE = "update";
@@ -79,11 +79,15 @@ public class Connexion implements Runnable {
         System.out.println("Reading from stream:");
         try {
             String command;
-            while ((command = inputdata.readLine()) != null && !close) {
-                System.out.println ("receive from : " + client.getInetAddress() + " : " + client.getPort() + ", command : " + command);
-                answerCommand(command);
-                if(close)
-                    break;
+            try {
+                while ((command = inputdata.readLine()) != null && !close) {
+                    System.out.println("receive from : " + client.getInetAddress() + " : " + client.getPort() + ", command : " + command);
+                    answerCommand(command);
+                    if (close)
+                        break;
+                }
+            }catch (Exception e){
+                System.out.println("\n Connexion avec le client :" + client.getInetAddress() + " : " + client.getPort() + " coupée inopinement !");
             }
             if(close)
             {
@@ -127,11 +131,11 @@ public class Connexion implements Runnable {
     public boolean isStateAuthentified(){
         if(Objects.equals(state, STATE_AUTHORIZATION))
         {
-            NUMBER_OF_CHANCES --;
             if (NUMBER_OF_CHANCES == 0)
             {
                 close = true;
             }
+            NUMBER_OF_CHANCES --;
             return true;
         }
         else

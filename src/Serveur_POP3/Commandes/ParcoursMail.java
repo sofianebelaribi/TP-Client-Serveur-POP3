@@ -33,11 +33,10 @@ public class ParcoursMail {
 
             }
         }
-        System.out.println("Liste de mes mails " + this.mesMails);
         return this.mesMails;
     }
 
-    //donne le la
+
     public void read(File file) {
         try{
             BufferedReader br  = new BufferedReader(new FileReader(file));
@@ -46,9 +45,6 @@ public class ParcoursMail {
                 if (strLine.contains("To:")){
                     String toMail = strLine.split("<")[1].split(">")[0];
                     if(toMail.equals(this.mail)) {
-//                        System.out.println("TO : -->"+toMail);
-//                        System.out.println(file.length());
-//                        System.out.println(file.getName());
                         this.mesMails.add(file);
                     }
                 }
@@ -104,12 +100,12 @@ public class ParcoursMail {
                 StringBuilder sb = new StringBuilder();
                 String line = br.readLine();
 
-                while (line != null) {
-                    sb.append("\r");
+                while (!line.equals(".")) {
                     sb.append(line);
                     sb.append("\n");
                     line = br.readLine();
                 }
+                sb.append(line);
                 return sb.toString();
             } finally {
                 br.close();

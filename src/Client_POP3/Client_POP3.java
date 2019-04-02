@@ -1,11 +1,21 @@
 package Client_POP3;
 
+import sun.java2d.loops.ProcessPath;
+import sun.security.provider.certpath.PKIXTimestampParameters;
+
+import javax.net.ssl.SSLServerSocket;
 import java.io.*;
+import java.lang.management.ManagementFactory;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Client_POP3 {
 
@@ -41,7 +51,7 @@ public class Client_POP3 {
                 System.out.println(e.getMessage());
             }
             String response = in.readLine();
-            System.out.println(response);
+            //System.out.println(response);
             return true;
         }
         catch (IOException e){
@@ -54,10 +64,39 @@ public class Client_POP3 {
     private String demandeConnection(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez indiquer votre nom d'utilisateur: ");
-        String commande = "APOP "+sc.nextLine();
+        String user = sc.nextLine();
+        if(user.split(" ").length>1){
+            System.out.println("Vous n'avez pas le droit de mettre d'espace!");
+            return demandeConnection();
+        }
+        String commande = "APOP "+user;
         System.out.println("Veuillez indiquer votre mot de passe: ");
-        commande += " "+sc.nextLine();
+        String pass = sc.nextLine();
+        if(pass.split(" ").length>1){
+            System.out.println("Vous n'avez pas le droit de mettre d'espace!");
+            return demandeConnection();
+        }
+        pass = criptageMD5(pass);
+        commande += " "+pass;
         return commande;
+    }
+
+    public String criptageMD5(String pass){
+        try {
+            MessageDigest md;
+            md = MessageDigest.getInstance("MD5");
+            byte[] passBytes = pass.getBytes();
+            md.reset();
+            byte[] digested = md.digest(passBytes);
+            StringBuffer sb = new StringBuffer();
+            for(int i=0;i<digested.length;i++){
+                sb.append(Integer.toHexString(0xff & digested[i]));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Client_POP3.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     private String sendConnection(String commande){
@@ -67,7 +106,7 @@ public class Client_POP3 {
             String[] response = in.readLine().split(" ");
             if(response[0].startsWith("+")){
                 connectedToAccount = true;
-                return "OK";
+                return response[response.length-2];
             }
             return response[1];
         }
@@ -87,11 +126,11 @@ public class Client_POP3 {
             tries++;
         }
         if(!connectedToServer){
-            System.out.println("Problème de connection au serveur!");
+            System.out.println("Probleme de connection au serveur!");
             return;
         }
 
-        //Connection à un compte
+        //Connection a un compte
         String response;
         Scanner sc = new Scanner(System.in);
         System.out.println("Bienvenue dans notre service!");
@@ -100,17 +139,20 @@ public class Client_POP3 {
         // Si la connection ne s'est pas faite
         while(!connectedToAccount){
             if(response.equals("0")){
-                System.out.println("Vous n'avez plus le droit de vous authentifier.");
+                System.out.println("Vous n'avez plus le droit de vous authentifier. Reessayez une prochaine fois.");
+                //Pour quitter le processus completement
+                System.exit(0);
             }
             else{
-                System.out.println("Oops, vos identifiants ne sont pas corrects, il vous restes "+response+" tentatives. Veuillez les resaisir:");
+                System.out.println("Oops, vos identifiants ne sont pas corrects, il vous restes "+response+" tentative(s). Veuillez les resaisir:");
                 commande = demandeConnection();
                 response = sendConnection(commande);
             }
         }
-        System.out.println("Vous êtes connecté!");
+        System.out.println("Vous etes connecte!\nVous avez "+response+" message(s)\n");
+
         while(connectedToServer){
-            System.out.println("Veuillez écrire une commande ici: ");
+            System.out.println("Veuillez ecrire une commande ici: ");
             commande = sc.nextLine();
             switch (commande.toUpperCase()){
                 case "ACTUALISER":
@@ -126,26 +168,35 @@ public class Client_POP3 {
                     break;
 
                 default:
-                    System.out.println("Commande inconnue! Tapez 'help' pour connaître les commandes possibles");
+                    System.out.println("Commande inconnue! Tapez 'help' pour connaitre les commandes possibles");
             }
         }
     }
 
     private void cmdActualiser(){
         try{
-            // On récupère le nombre de mail
+            // On recupere le nombre de mail
             String commande = "STAT";
             out.writeBytes(commande+"\r");
             out.flush();
-            String[] response = in.readLine().split(" ");
+            String returned = in.readLine();
+            String[] response = returned.split(" ");
+
+            //System.out.println(returned);
+
             if(response[0].startsWith("+")){
                 Integer nbMail = Integer.parseInt(response[1]);
-                commande = "RETR";
-                out.writeBytes(commande+"\r");
-                out.flush();
+                BufferedWriter file = new BufferedWriter(new FileWriter("data/client/text.txt"));
+                System.out.println("Vous avez "+nbMail+" messages");
                 for(int i=0;i<nbMail;i++){
-                    nouveauMail();
+                    commande = "RETR " + i;
+                    out.writeBytes(commande+"\r");
+                    out.flush();
+                    nouveauMail(file, i+1);
                 }
+
+                file.close();
+                readFile();
             }
         }
         catch(IOException e){
@@ -154,22 +205,36 @@ public class Client_POP3 {
         }
     }
 
-    private void nouveauMail(){
+    private void nouveauMail(BufferedWriter file, Integer index){
+
         try{
-            BufferedWriter file = new BufferedWriter(new FileWriter("data/client/"));
-            String commande = "";
-            out.writeBytes(commande);
-            out.flush();
             String response;
+            file.write("Message "+index);
+            file.newLine();
             while(!(response = in.readLine()).equals(".")){
                 file.write(response);
                 file.newLine();
             }
-            file.close();
+            file.newLine();
+            file.newLine();
         }
         catch (IOException e){
             System.out.println(e.getLocalizedMessage());
             System.out.println(e.getMessage());
+        }
+    }
+
+    private void readFile() {
+        try{
+            BufferedReader file = new BufferedReader(new FileReader("data/client/text.txt"));
+
+            String strLine;
+            while((strLine = file.readLine()) != null ){
+                System.out.println(strLine);
+            }
+            file.close();
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -179,8 +244,9 @@ public class Client_POP3 {
             out.writeBytes(commande+"\r");
             out.flush();
             String response = in.readLine();
+            //System.out.println(response);
             if(response.startsWith("+")){
-                System.out.println("Vous vous êtes déconnecté, nous vous remerçions pour votre visite.");
+                System.out.println("Vous vous etes deconnecte, nous vous remercions pour votre visite.");
                 connectedToServer = false;
                 connectedToAccount = false;
             }
@@ -208,7 +274,92 @@ public class Client_POP3 {
     }
 
     public static void main(String[] args) {
-        Client_POP3 cli = new Client_POP3();
-        cli.run();
+        //Client_POP3 cli = new Client_POP3("192.168.43.8",110);
+        //Client_POP3 cli = new Client_POP3();
+        //cli.run();
+
+        Timestamp time = new Timestamp(System.currentTimeMillis());//temps
+        System.out.println(ManagementFactory.getRuntimeMXBean().getName());//pid & hostname
+        try {
+            SSLServerSocket sslServerSocket = new SSLServerSocket() {
+                @Override
+                public String[] getEnabledCipherSuites() {
+                    return new String[0];
+                }
+
+                @Override
+                public void setEnabledCipherSuites(String[] strings) {
+
+                }
+
+                @Override
+                public String[] getSupportedCipherSuites() {
+                    return new String[0];
+                }
+
+                @Override
+                public String[] getSupportedProtocols() {
+                    return new String[0];
+                }
+
+                @Override
+                public String[] getEnabledProtocols() {
+                    return new String[0];
+                }
+
+                @Override
+                public void setEnabledProtocols(String[] strings) {
+
+                }
+
+                @Override
+                public void setNeedClientAuth(boolean b) {
+
+                }
+
+                @Override
+                public boolean getNeedClientAuth() {
+                    return false;
+                }
+
+                @Override
+                public void setWantClientAuth(boolean b) {
+
+                }
+
+                @Override
+                public boolean getWantClientAuth() {
+                    return false;
+                }
+
+                @Override
+                public void setUseClientMode(boolean b) {
+
+                }
+
+                @Override
+                public boolean getUseClientMode() {
+                    return false;
+                }
+
+                @Override
+                public void setEnableSessionCreation(boolean b) {
+
+                }
+
+                @Override
+                public boolean getEnableSessionCreation() {
+                    return false;
+                }
+            };
+            System.out.println(sslServerSocket.getEnabledCipherSuites()[0]);
+        }
+        catch (IOException e){
+
+        }
+    }
+
+    private Socket getClientSocket() {
+        return clientSocket;
     }
 }

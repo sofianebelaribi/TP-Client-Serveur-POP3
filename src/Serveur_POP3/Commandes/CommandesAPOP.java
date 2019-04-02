@@ -6,6 +6,10 @@ import Serveur_POP3.Connexion;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CommandesAPOP extends Commandes {
 
@@ -60,7 +64,7 @@ public class CommandesAPOP extends Commandes {
         unParcours.listAllFiles(unParcours.folder);
 
         this.nbrMsg = unParcours.mesMails.size();
-        System.out.println(this.nbrMsg);
+        System.out.println(this.nbrMsg + " messages");
     }
 
     public boolean read(String[] s) {
@@ -70,7 +74,7 @@ public class CommandesAPOP extends Commandes {
             while((strLine = br.readLine()) != null ){
                 String user = strLine.split(" ")[0];
                 String pass = strLine.split(" ")[1];
-
+                pass = cryptWithMD5(pass);
                 if (user.equals(s[0]) && pass.equals(s[1])){
                     return true;
                 }
@@ -84,6 +88,24 @@ public class CommandesAPOP extends Commandes {
 
     private void setUser(String user) {
         server.setUser(user);
+    }
+
+    public static String cryptWithMD5(String pass){
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("MD5");
+            byte[] passBytes = pass.getBytes();
+            md.reset();
+            byte[] digested = md.digest(passBytes);
+            StringBuffer sb = new StringBuffer();
+            for(int i=0;i<digested.length;i++){
+                sb.append(Integer.toHexString(0xff & digested[i]));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(CommandesAPOP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }
 

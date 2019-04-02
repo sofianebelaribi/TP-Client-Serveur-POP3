@@ -1,12 +1,12 @@
 From: Guillaume LEFEBVRE <guillaume.l@gmail.com>
 To: Jonathan RENARD <jonathan.r@gmail.com>
-Subject: Invitation à Disneyland Paris
+Subject: Invitation a Disneyland Paris
 Date: Mon, 25 Mar 2019 10:50:12 -0600
 Message-ID: <5@local.machine.example>
 
 Jonathan,
-C'est très gentil de m'avoir invité pour cette sortie à Disneyland Paris.
-Malheureusement je ne suis pas disponible le jour où tu m'as proposé...
-De plus je suis surchargé de travail en ce moment...
+C'est tres gentil de m'avoir invite pour cette sortie a Disneyland Paris.
+Malheureusement je ne suis pas disponible le jour ou tu m'as propose...
+De plus je suis surcharge de travail en ce moment...
 Guillaume
 .
