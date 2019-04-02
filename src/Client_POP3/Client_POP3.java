@@ -1,18 +1,12 @@
 package Client_POP3;
 
-import sun.java2d.loops.ProcessPath;
-import sun.security.provider.certpath.PKIXTimestampParameters;
-
-import javax.net.ssl.SSLServerSocket;
+import javax.net.SocketFactory;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
-import java.lang.management.ManagementFactory;
 import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,22 +15,46 @@ public class Client_POP3 {
 
     DataOutputStream out;
     BufferedReader in;
-    Socket clientSocket;
+    SSLSocket clientSocket;
     Boolean connectedToServer = false;
     Boolean connectedToAccount = false;
     Integer port;
     String ip;
 
+    String timbre;
+
     public Client_POP3(){
-        clientSocket = new Socket();
+        initClientSSL();
         ip = "localhost";
-        port = 110;
+        port = 1025;
     }
 
     public Client_POP3(String ip, Integer port){
-        clientSocket = new Socket();
+        initClientSSL();
         this.ip = ip;
         this.port = port;
+    }
+
+    private void initClientSSL(){
+        try{
+            SocketFactory sslSocketFactory = SSLSocketFactory.getDefault();
+            clientSocket = (SSLSocket) sslSocketFactory.createSocket();
+            String[] allCipherSuites = clientSocket.getSupportedCipherSuites();
+            List<String> listAnonCipherSuites = new ArrayList<>();
+            for(String cipherSuites : allCipherSuites){
+                if(cipherSuites.contains("anon")){
+                    listAnonCipherSuites.add(cipherSuites);
+                }
+            }
+            String[] newCipherSuites = new String[listAnonCipherSuites.size()];
+            for(int i=0;i<newCipherSuites.length;i++){
+                newCipherSuites[i] = listAnonCipherSuites.get(i);
+            }
+            clientSocket.setEnabledCipherSuites(newCipherSuites);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     private boolean connecte(){
@@ -50,8 +68,9 @@ public class Client_POP3 {
                 System.out.println(e.getLocalizedMessage());
                 System.out.println(e.getMessage());
             }
-            String response = in.readLine();
-            //System.out.println(response);
+            String[] response = in.readLine().split(" ");
+            timbre = response[response.length-1];
+
             return true;
         }
         catch (IOException e){
@@ -76,6 +95,7 @@ public class Client_POP3 {
             System.out.println("Vous n'avez pas le droit de mettre d'espace!");
             return demandeConnection();
         }
+        pass = timbre+pass;
         pass = criptageMD5(pass);
         commande += " "+pass;
         return commande;
@@ -274,92 +294,13 @@ public class Client_POP3 {
     }
 
     public static void main(String[] args) {
-        //Client_POP3 cli = new Client_POP3("192.168.43.8",110);
-        //Client_POP3 cli = new Client_POP3();
-        //cli.run();
+        //Client_POP3 cli = new Client_POP3("192.168.43.8",1025);
+        Client_POP3 cli = new Client_POP3();
+        cli.run();
 
-        Timestamp time = new Timestamp(System.currentTimeMillis());//temps
-        System.out.println(ManagementFactory.getRuntimeMXBean().getName());//pid & hostname
-        try {
-            SSLServerSocket sslServerSocket = new SSLServerSocket() {
-                @Override
-                public String[] getEnabledCipherSuites() {
-                    return new String[0];
-                }
-
-                @Override
-                public void setEnabledCipherSuites(String[] strings) {
-
-                }
-
-                @Override
-                public String[] getSupportedCipherSuites() {
-                    return new String[0];
-                }
-
-                @Override
-                public String[] getSupportedProtocols() {
-                    return new String[0];
-                }
-
-                @Override
-                public String[] getEnabledProtocols() {
-                    return new String[0];
-                }
-
-                @Override
-                public void setEnabledProtocols(String[] strings) {
-
-                }
-
-                @Override
-                public void setNeedClientAuth(boolean b) {
-
-                }
-
-                @Override
-                public boolean getNeedClientAuth() {
-                    return false;
-                }
-
-                @Override
-                public void setWantClientAuth(boolean b) {
-
-                }
-
-                @Override
-                public boolean getWantClientAuth() {
-                    return false;
-                }
-
-                @Override
-                public void setUseClientMode(boolean b) {
-
-                }
-
-                @Override
-                public boolean getUseClientMode() {
-                    return false;
-                }
-
-                @Override
-                public void setEnableSessionCreation(boolean b) {
-
-                }
-
-                @Override
-                public boolean getEnableSessionCreation() {
-                    return false;
-                }
-            };
-            System.out.println(sslServerSocket.getEnabledCipherSuites()[0]);
-        }
-        catch (IOException e){
-
-        }
     }
 
-    private Socket getClientSocket() {
+    private SSLSocket getClientSocket() {
         return clientSocket;
     }
 }

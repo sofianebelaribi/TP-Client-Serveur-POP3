@@ -4,7 +4,6 @@ package Serveur_POP3.Commandes;
 import Serveur_POP3.Connexion;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -73,12 +72,14 @@ public class CommandesAPOP extends Commandes {
             String strLine;
             while((strLine = br.readLine()) != null ){
                 String user = strLine.split(" ")[0];
-                String pass = strLine.split(" ")[1];
-                pass = cryptWithMD5(pass);
+                String pass = server.getTimbre()+strLine.split(" ")[1];
+                pass = criptageMD5(pass);
                 if (user.equals(s[0]) && pass.equals(s[1])){
+                    br.close();
                     return true;
                 }
             }
+            br.close();
         }
         catch(Exception e ){
             System.out.println(e);
@@ -90,7 +91,7 @@ public class CommandesAPOP extends Commandes {
         server.setUser(user);
     }
 
-    public static String cryptWithMD5(String pass){
+    public static String criptageMD5(String pass){
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("MD5");

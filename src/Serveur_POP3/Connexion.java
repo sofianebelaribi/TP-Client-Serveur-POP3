@@ -2,8 +2,10 @@ package Serveur_POP3;
 
 import Serveur_POP3.Commandes.*;
 
+import javax.net.ssl.SSLSocket;
 import java.io.*;
-import java.net.Socket;
+import java.lang.management.ManagementFactory;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -12,10 +14,11 @@ public class Connexion implements Runnable {
     //INITIALIZE
     private BufferedReader inputdata;
     private DataOutputStream outputdata;
-    private Socket client;
+    private SSLSocket client;
     private boolean close;
     private ArrayList<Commandes> CommandesList = new ArrayList<>();
     private String user;
+    private String timbre;
 
     //CONSTANTS
     int NUMBER_OF_CHANCES = 3;
@@ -33,12 +36,16 @@ public class Connexion implements Runnable {
         CommandesList.add(new CommandesQUIT(this,"QUIT"));
         CommandesList.add(new CommandesACTU(this,"ACTU"));
     }
-    Connexion(Socket aClientSocket){
+    Connexion(SSLSocket aClientSocket){
         setCommandesList();
         try {
             client = aClientSocket;
             inputdata = new BufferedReader( new InputStreamReader(client.getInputStream()));
             outputdata =new DataOutputStream( client.getOutputStream());
+            //Le timbre-a-date
+            String[] info = ManagementFactory.getRuntimeMXBean().getName().split("@");
+            Timestamp time = new Timestamp(System.currentTimeMillis());
+            timbre = "<"+info[0]+"."+time.getTime()+"@"+info[1]+">";
         }
         catch(IOException e) {
             System.out.println("Connection: "+e.getMessage());
@@ -59,7 +66,7 @@ public class Connexion implements Runnable {
     public void run(){
         try {
             // an echo server
-            String data = "+OK alpha POP3 server Ready\r";
+            String data = "+OK alpha POP3 server Ready "+timbre+"\r";
 
             System.out.println ("New connection: " + client.getPort() + ", " + client.getInetAddress());
             outputdata.writeBytes(data); // UTF is a string encoding
@@ -153,5 +160,9 @@ public class Connexion implements Runnable {
 
     public String getUser() {
         return user;
+    }
+
+    public String getTimbre(){
+        return timbre;
     }
 }

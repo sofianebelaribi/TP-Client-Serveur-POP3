@@ -1,7 +1,6 @@
 package Serveur_POP3.Commandes;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +48,7 @@ public class ParcoursMail {
                     }
                 }
             }
+            br.close();
         }
         catch(Exception e ){
             System.out.println(e);
@@ -66,9 +66,11 @@ public class ParcoursMail {
                 String pass = s[1];
 
                 if (user.equals(usercheck)){
+                    br.close();
                     return s[2].split("<")[1].split(">")[0];
                 }
             }
+            br.close();
         }
         catch(Exception e ){
             System.out.println(e);
